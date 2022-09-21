@@ -17,11 +17,7 @@ h2.innerText = "Click Top Row to Start! Player 1 Begins.";
 /** makeBoard: create in-JS board structure:
  *    board = array of rows, each row is array of cells  (board[y][x])
  */
-
-
-//current issue to fix: how board is build. Bottom row should be 0 first. 
 function makeBoard() {
-  // TODO: set "board" to empty HEIGHT x WIDTH matrix array
   for(let i = 0; i<HEIGHT; i++){
     board[i] = [];
 
@@ -63,22 +59,23 @@ function makeHtmlBoard() {
   }
 }
 
-/** findSpotForCol: given column x, return top empty y (null if filled) */
-
+/** findSpotForCol: given column x, return top empty y (null if column is already filled) */
 function findSpotForCol(x) {
-  // TODO: write the real version of this, rather than always returning 0
-  return 0;
+  for (let y = HEIGHT - 1; y >= 0; y--) {
+    if (!board[y][x]) {
+      return y;
+    }
+  }
+  return null;
 }
 
 /** placeInTable: update DOM to place piece into HTML table of board */
-
 function placeInTable(y, x) {
-  // TODO: make a div and insert into correct table cell
-
   let target = document.getElementById(`${y}-${x}`);
 
   let div = document.createElement('div');
   div.classList.add('piece');
+  
   if (currPlayer == 1){
     div.classList.add('p1');
   }
@@ -86,19 +83,15 @@ function placeInTable(y, x) {
     div.classList.add('p2');
   }
   target.append(div);
-
 }
-
 
 
 /** endGame: announce game end */
-
 function endGame(msg) {
-  // TODO: pop up alert message
+  alert(msg);
 }
 
 /** handleClick: handle click of column top to play piece */
-
 function handleClick(evt) {
   // get x from ID of clicked cell
   let x = +evt.target.id;
@@ -110,8 +103,8 @@ function handleClick(evt) {
   }
 
   // place piece in board and add to HTML table
-  // TODO: add line to update in-memory board
   placeInTable(y, x);
+  board[y][x] = currPlayer;
 
   // check for win
   if (checkForWin()) {
@@ -119,7 +112,9 @@ function handleClick(evt) {
   }
 
   // check for tie
-  // TODO: check if all cells in board are filled; if so call, call endGame
+  if (board.every(row => row.every(cell => cell))) {
+    return endGame('Tie!');
+  }
 
   // switch players
   if (currPlayer == 1){

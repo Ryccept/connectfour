@@ -1,25 +1,27 @@
-/* game board table */
-/* recall that td is a cell */
+/* setting up the background and font */
 body {
   font-family: 'Silkscreen', cursive;
-}
-
-h1 {
+  background-image: url("https://images.unsplash.com/photo-1614849286521-4c58b2f0ff15?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80");
+  background-repeat: no-repeat;
+  background-size: 100%;
   text-align: center;
 }
 
-h2{
-  text-align: center;
+/* moving the actual board to be in the center */
+#game{
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
+/* sets up the actual board squares */
 #board td {
   width: 50px;
   height: 50px;
   border: solid 1px #666;
 }
 
-/* pieces are div within game table cells: draw as colored circles */
-
+/* pieces are div within game table cells. This sets them as circles*/
 .piece {
   margin: 5px;
   width: 80%;
@@ -28,6 +30,7 @@ h2{
   border: solid 1.5px rgb(0, 0, 0);
 }
 
+/* the color of each piece (depending on the player) */
 .p1{
   background: red;
 }
@@ -36,8 +39,8 @@ h2{
   background: blue;
 }
 
-/* column-top is table row of clickable areas for each column */
 
+/* This is what differentiates the top row from the game and gives it the hover effect */
 #column-top td {
   border: dashed 1px lightgray;
 }
