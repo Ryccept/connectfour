@@ -28,6 +28,15 @@ body {
   height: 80%;
   border-radius: 100%;
   border: solid 1.5px rgb(0, 0, 0);
+  position: relative;
+  top: 0%;
+  animation-name: pieceDrop;
+  animation-duration: 1s;
+}
+/* the animation */
+@keyframes pieceDrop{
+  from{transform: translateY(-370px);}
+  to{transform: translateY(0px);}
 }
 
 /* the color of each piece (depending on the player) */
